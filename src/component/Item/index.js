@@ -10,7 +10,9 @@ const Item = ({ item, setModalOpen, setCurr }) => {
     >
       <td>{item.owner.display_name}</td>
       <td>{item.creation_date}</td>
-      <td>{item.link}</td>
+      <td>
+        <a href={item.link}>{item.link}</a>
+      </td>
       <td>{item.title}</td>
     </tr>
   );
