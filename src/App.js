@@ -1,19 +1,15 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-// import InfiniteScroll from "react-infinite-scroll-component";
 import "./App.css";
 import HeaderRow from "./component/HeaderRow";
-import styled from "styled-components";
 import Item from "./component/Item";
 import Popup from "./component/Popup";
-import { getUsers } from "./API";
-// import data from "./stack overflow.json";
+
 function App() {
   const [obj, setObj] = useState([]);
   const [page, setpage] = useState(1);
   const [modalOpen, setModalOpen] = useState(false);
   const [curr, setCurr] = useState(null);
-  const [loading, setLoading] = useState(true);
 
   const handleScroll = (e) => {
     console.log(e);
@@ -21,7 +17,7 @@ function App() {
     console.log(document.documentElement.scrollTop);
     console.log(document.documentElement.offsetHeight);
     if (
-      document.documentElement.scrollTop + window.innerHeight + 50 >=
+      document.documentElement.scrollTop + window.innerHeight + 100 >=
       document.documentElement.offsetHeight
     ) {
       setpage((prev) => prev + 1);
@@ -29,10 +25,11 @@ function App() {
   };
   useEffect(() => {
     async function getData() {
-      setLoading(true);
-      const newUsers = await getUsers(page);
-      setObj((prev) => [...prev, ...newUsers]);
-      setLoading(false);
+      // const newUsers = await getUsers(page);
+      const users = await axios.get(
+        `https://api.stackexchange.com/2.2/search/advanced?page=${page}&order=desc&sort=activity&site=stackoverflow`
+      );
+      setObj((prev) => [...prev, ...users.data.items]);
     }
     getData();
     window.addEventListener("scroll", handleScroll);
@@ -58,11 +55,3 @@ function App() {
 }
 
 export default App;
-const Content = styled.div`
-  /* display: grid;
-  grid-template-columns: 1fr;
-  
-  height: 800px;
-  margin: 0 auto;
-  overflow: auto; */
-`;
