@@ -1,5 +1,6 @@
 import React from "react";
 import Modal from "react-modal";
+// import { Link } from "react-router-dom";
 import "./style.css";
 const Popup = ({ curr, modalOpen, setModalOpen }) => {
   return (
@@ -10,26 +11,42 @@ const Popup = ({ curr, modalOpen, setModalOpen }) => {
         overlay: {},
         content: {
           position: "absolute",
-          top: 100,
+          top: 200,
           left: 300,
           right: 300,
-          bottom: 100,
+          bottom: 180,
           borderRadius: 30,
           backgroundColor: "rgb(205 154 171)",
         },
       }}
     >
       <div className="modal_cont">
-        <h4>Book Title : </h4>
-        <div>{curr?.Title}</div>
-        <h4>Author :</h4>
-        <div>{curr?.Author}</div>
+        <h4>Author Name : </h4>
+        <div>{curr?.owner.display_name}</div>
+        <h4>Title :</h4>
+        <div>{curr?.title}</div>
         <h4>Creation Date :</h4>
-        <div>{curr?.CreationDate}</div>
-        <div>{curr?.link}</div>
+        <div>{curr?.creation_date}</div>
+        <h4>Author ID : </h4>
+        <div>{curr?.owner.user_id}</div>
+        <h4>Tags : </h4>
+        <div>{curr?.tags[0]}</div>
+        <div>
+          <a href={`${curr?.link}`}>{curr?.link}</a>
+        </div>
       </div>
       <br />
-      <button className="modal_btn" onClick={() => setModalOpen(false)}>
+      <button
+        style={{
+          border: "none",
+          outline: "none",
+          height: 30,
+          width: 50,
+          borderRadius: 10,
+        }}
+        className="modal_btn"
+        onClick={() => setModalOpen(false)}
+      >
         Close
       </button>
     </Modal>

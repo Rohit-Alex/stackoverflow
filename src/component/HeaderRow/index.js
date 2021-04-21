@@ -2,13 +2,12 @@ import React from "react";
 
 const HeaderRow = () => {
   return (
-    <tr>
-      <th>Title</th>
-      <th>Author</th>
-      <th>CreationDate</th>
-      <th>Title</th>
-    </tr>
+    <div className="row">
+      <div className="imgCont">Author</div>
+      <div className="creation_date">CreationDate</div>
+      <div className="title">Title</div>
+      <div className="ques_id">Question ID</div>
+    </div>
   );
 };
-
 export default HeaderRow;

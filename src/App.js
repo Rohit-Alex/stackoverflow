@@ -12,12 +12,11 @@ function App() {
   const [curr, setCurr] = useState(null);
 
   const handleScroll = (e) => {
-    console.log(e);
     console.log(window.innerHeight);
     console.log(document.documentElement.scrollTop);
     console.log(document.documentElement.offsetHeight);
     if (
-      document.documentElement.scrollTop + window.innerHeight + 100 >=
+      document.documentElement.scrollTop + window.innerHeight + 50 >=
       document.documentElement.offsetHeight
     ) {
       setpage((prev) => prev + 1);
@@ -25,11 +24,10 @@ function App() {
   };
   useEffect(() => {
     async function getData() {
-      // const newUsers = await getUsers(page);
-      const users = await axios.get(
+      const res = await axios.get(
         `https://api.stackexchange.com/2.2/search/advanced?page=${page}&order=desc&sort=activity&site=stackoverflow`
       );
-      setObj((prev) => [...prev, ...users.data.items]);
+      setObj((prev) => [...prev, ...res.data.items]);
     }
     getData();
     window.addEventListener("scroll", handleScroll);
@@ -40,15 +38,28 @@ function App() {
   console.log(obj);
   return (
     <div className="App">
-      <table>
+      <h2
+        style={{ display: "grid", placeItems: "center", paddingBottom: "40px" }}
+      >
+        Stack Overflow
+      </h2>
+      <div style={{ overflowX: "hidden" }}>
         <HeaderRow />
-
-        <div>
-          {obj?.map((item) => (
-            <Item item={item} setCurr={setCurr} setModalOpen={setModalOpen} />
+        <hr />
+        <table>
+          {obj.map((item) => (
+            <>
+              <Item
+                key={item.question_id}
+                item={item}
+                setCurr={setCurr}
+                setModalOpen={setModalOpen}
+              />
+              <hr />
+            </>
           ))}
-        </div>
-      </table>
+        </table>
+      </div>
       <Popup curr={curr} modalOpen={modalOpen} setModalOpen={setModalOpen} />
     </div>
   );

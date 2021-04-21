@@ -1,0 +1,27 @@
+.image {
+  border-radius: 80px;
+  cursor: pointer;
+}
+.row {
+  min-width: 100vw;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.imgCont {
+  flex: 0.2;
+  display: grid;
+  place-items: center;
+}
+.creation_date {
+  flex: 0.2;
+}
+.title {
+  flex: 0.4;
+  display: grid;
+  place-items: center;
+}
+.ques_id {
+  flex: 0.2;
+}

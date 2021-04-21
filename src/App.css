@@ -3,3 +3,11 @@
   margin: 0;
   box-sizing: border-box;
 }
+.App {
+  padding: 20px;
+}
+table {
+  border-collapse: separate;
+  border-spacing: 0 1em;
+  overflow-x: none;
+}
