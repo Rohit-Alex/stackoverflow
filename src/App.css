@@ -5,6 +5,7 @@
 }
 .App {
   padding: 20px;
+  background-color: pink;
 }
 table {
   border-collapse: separate;
